@@ -18,15 +18,15 @@ class TransactionFactory extends Factory
     {
         return [
             'client' => fake('pt_BR')->company(),
-            'region' => fake('pt_BR')->stateAbbr(),
+            'region' => fake('pt_BR')->randomElement(['SP', 'SP', 'SP', 'RJ', 'RJ', 'MG', 'MG', 'DF', 'DF', 'BA', 'PR', 'RS', 'CE', 'GO', 'AM', 'SC', 'ES', 'MT', 'PA', 'PE', 'MA', 'MS', 'PB', 'RN', 'AL', 'PI', 'SE', 'RO', 'TO', 'AC', 'AP', 'RR']),
             'user_agent' => fake()->userAgent(),
             'gender' => fake()->randomElement(['male', 'male', 'female', 'female', 'female', 'other']),
             'ip' => fake()->ipv4(),
             'payment_method' => fake()->randomElement(['credit_card', 'credit_card', 'debit_card', 'pix', 'ticket']),
             'payment_status' => fake()->randomElement(['authorized', 'paid', 'paid', 'canceled', 'declined', 'refunded', 'pending']),
             'device' => fake()->randomElement(['mobile', 'mobile', 'mobile', 'tablet', 'desktop']),
-            'lat' => fake($min = -55, 6752, $max = -33, 7516)->latitude(), // max and min latitude in Brazil
-            'long' => fake($min = -75, 2552, $max = -28, 2552)->longitude(), // max and min longitude in Brazil
+            'lat' => fake()->latitude($min = -33.7500, $max =  5.2700), // max and min latitude in Brazil
+            'long' => fake()->longitude($min = -73.9900, $max = -34.7900), // max and min longitude in Brazil
             'value' => fake()->randomFloat(2, 80, 1000),
             'quantity' => fake()->numberBetween(1, 6),
             'created_at' => fake()->dateTimeBetween('-1 month', 'now'),

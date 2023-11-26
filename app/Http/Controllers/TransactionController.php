@@ -75,7 +75,7 @@ class TransactionController extends Controller
                     return $query->count();
                     break;
                 case 'geolocation':
-                    return $query->select('client', 'lat', 'long',)->get();
+                    return $query->select('client', 'lat', 'long',)->skip(0)->take(500)->get();
                     break;
                 case 'region':
                     return $query->select('region', DB::raw('count(*) as total'))
@@ -123,24 +123,4 @@ class TransactionController extends Controller
         }
     }
 
-
-    // public function typeWidgets($type)
-    // {
-    //     // dd($type);
-    //     $data = new stdClass();
-    //     if ($type == 'all') {
-    //         $data->count = Transaction::count();
-    //         $data->total = Transaction::sum('value');
-    //         $data->qtd = Transaction::sum('quantity');
-    //         $data->max = Transaction::max('value');
-    //         $data->min = Transaction::min('value');
-    //         $data->transaction = Transaction::select('value', 'quantity')->get();
-    //     } else {
-    //         $data = Transaction::select($type, DB::raw('count(*) as total'))
-    //             ->groupBy($type)
-    //             ->pluck('total', $type);
-    //     }
-
-    //     return $data;
-    // }
 }
