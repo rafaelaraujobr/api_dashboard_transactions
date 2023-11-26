@@ -18,6 +18,7 @@ class TransactionFactory extends Factory
     {
         return [
             'client' => fake('pt_BR')->company(),
+            // 'region' => fake('pt_BR')->stateAbbr(),
             'region' => fake('pt_BR')->randomElement(['SP', 'SP', 'SP', 'RJ', 'RJ', 'MG', 'MG', 'DF', 'DF', 'BA', 'PR', 'RS', 'CE', 'GO', 'AM', 'SC', 'ES', 'MT', 'PA', 'PE', 'MA', 'MS', 'PB', 'RN', 'AL', 'PI', 'SE', 'RO', 'TO', 'AC', 'AP', 'RR']),
             'user_agent' => fake()->userAgent(),
             'gender' => fake()->randomElement(['male', 'male', 'female', 'female', 'female', 'other']),

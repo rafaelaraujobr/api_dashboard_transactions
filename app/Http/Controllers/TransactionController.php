@@ -79,7 +79,7 @@ class TransactionController extends Controller
                     break;
                 case 'region':
                     return $query->select('region', DB::raw('count(*) as total'))
-                        ->groupBy('region')
+                        ->groupBy('region')->orderBy('total', 'desc')
                         ->pluck('total', 'region')->toArray();
                     break;
                 case 'gender':
