@@ -128,7 +128,6 @@ http://localhost:8000/widgets/quantity/dashboard
 
 + Response 200 (application/json)
 6972
-```
 
 ### 2. Obter informacoes das lista de informacoes
 
