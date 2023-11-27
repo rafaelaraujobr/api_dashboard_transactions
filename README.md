@@ -116,10 +116,12 @@ http://localhost:8000/widgets/min_max/dashboard
 **Exemplo de Resposta:**
 
 + Response 200 (application/json)
-{
-	"max": "999.30",
-	"min": "80.20"
-}
+```json
+    {
+        "max": "999.30",
+        "min": "80.20"
+    }
+```
 
 ### 1. Obter informacoes das lista de informacoes
 
