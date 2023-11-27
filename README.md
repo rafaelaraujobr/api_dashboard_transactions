@@ -56,11 +56,11 @@ Bem-vindo à documentação da API REST para o serviço de widgets. Esta API for
 
 ## Métodos
 Requisições para a API devem seguir os padrões:
-| Método | Descrição |
-|---|---|
-| `GET` | Retorna informações dos Widgets do Dashboard. |
-| `GET` | Retorna informações da lista de transações. |
-| `GET` | Atualiza dados de um registro ou altera sua situação. |
+| Método | Descrição | Endpoint|
+|---|---|---|
+| `GET` | Retorna informações dos Widgets do Dashboard. | /widgets/{parametro}/dashboard|
+| `GET` | Retorna informações da lista de transações.| /transaction?query|
+| `GET` | Atualiza dados de um registro ou altera sua situação. | /transaction/{transaction_id}|
 
 ### 1. Obter informacoes dos Widgets do Dashboard
 
@@ -84,10 +84,11 @@ GET /widgets/{parametro}/dashboard
 - 404 Not Found: Recurso não encontrado.
 
 **Exemplo de Requisição:**
-GET /widgets/geolocation/dashboard
+http://localhost:8000/widgets/geolocation/dashboard
 **Exemplo de Resposta:**
 
 + Response 200 (application/json)
+```json
 [
 	{
 		"client": "Fontes S.A.",
@@ -98,18 +99,9 @@ GET /widgets/geolocation/dashboard
 		"client": "Maia-Soares",
 		"lat": -27.018904,
 		"long": -58.061755
-	},
-	{
-		"client": "Pedrosa S.A.",
-		"lat": -27.295675,
-		"long": -55.130655
-	},
-	{
-		"client": "Amaral Comercial Ltda.",
-		"lat": -5.927239,
-		"long": -41.781814
 	}
 ]
+```
 
 **Exemplo de Requisição:**
 http://localhost:8000/widgets/min_max/dashboard
@@ -123,11 +115,37 @@ http://localhost:8000/widgets/min_max/dashboard
     }
 ```
 
-### 1. Obter informacoes das lista de informacoes
+**Exemplo de Requisição:**
+http://localhost:8000/widgets/revenue/dashboard
+**Exemplo de Resposta:**
+
++ Response 200 (application/json)
+295141.74
+
+**Exemplo de Requisição:**
+http://localhost:8000/widgets/quantity/dashboard
+**Exemplo de Resposta:**
+
++ Response 200 (application/json)
+6972
+```
+
+### 2. Obter informacoes das lista de informacoes
 
 **Endpoint:**
 GET /transactions?query
-**Query Parâmetros:**
+
+**Query query:**
+
+- `per_page`: Quantidade de itens por pagina.
+- `page`: pagina a ser mostrada.
+- `search`: buscar por client.
+- `device`: buscar por dispositivo.
+- `gender`: buscar por genero.
+- `region`: buscar por regiao.
+- `payment_method`: buscar por metodo de pagamento.
+- `payment_status`: buscar por status de pagamento.
+- `from & to`: buscar por entre datas de criacao.
 
 **Códigos de Resposta:**
 - 200 OK: A solicitação foi bem-sucedida.
@@ -139,6 +157,7 @@ http://localhost:8000/transactions/
 **Exemplo de Resposta:**
 
 + Response 200 (application/json)
+```json
 {
 	"data": [
 		{
@@ -334,4 +353,42 @@ http://localhost:8000/transactions/
 		"to": 10,
 		"total": 2000
 	}
+}
+```
+
+### 1. Obter informacoes dos Widgets do Dashboard
+
+**Endpoint:**
+GET /widgets/{parametro}/dashboard
+**Parâmetros:**
+
+- `trnsaction_id` (Obrigatório): Parâmetro id da transacao.
+
+**Códigos de Resposta:**
+- 200 OK: A solicitação foi bem-sucedida.
+- 400 Bad Request: Parâmetros ausentes ou inválidos.
+- 404 Not Found: Recurso não encontrado.
+
+**Exemplo de Requisição:**
+http://localhost:8000/transaction/50
+**Exemplo de Resposta:**
+
++ Response 200 (application/json)
+```json
+{
+	"id": 1500,
+	"gender": "male",
+	"region": "RJ",
+	"ip": "31.100.48.208",
+	"user_agent": "Mozilla\/5.0 (Macintosh; U; PPC Mac OS X 10_7_1) AppleWebKit\/5330 (KHTML, like Gecko) Chrome\/40.0.866.0 Mobile Safari\/5330",
+	"client": "Delvalle-Escobar",
+	"payment_method": "ticket",
+	"payment_status": "paid",
+	"device": "mobile",
+	"lat": -8.291049,
+	"long": -62.137811,
+	"value": "952.55",
+	"quantity": 3,
+	"created_at": "2023-11-06T10:14:18.000000Z",
+	"updated_at": "2023-11-18T03:46:12.000000Z"
 }
